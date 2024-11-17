@@ -1,2 +1,1 @@
-# egg_catcher
- Egg Catcher: Potato Edition
+A very basic egg catcher game with lack of features.
