@@ -83,13 +83,6 @@ function _update()
   end
 end
 
-    if egg.y > 160 then
-      del(eggs, egg)
-      live_count -= 1
-    end
-  end
-end
-
 -- custom function
 function draw_scaled_sprite(sprite_id, x, y, scale)
   -- pos_x
