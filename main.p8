@@ -38,8 +38,24 @@ function _draw()
   end
 end
 
+function _draw()
+  cls()
+  print("score: " .. score, 0, 8)
+  for i = 1, live_count do
+    spr(1, 8 * (i - 1), 16)
+  end
+  draw_scaled_sprite(0, basket_x, basket_y, 2)
+  for egg in all(eggs) do
+    spr(2, egg.x, egg.y)
+  end
+  if live_count <= 0 then
+    print("game over!", 44, 64, 8)
+    print("final score: " .. score, 8)
+    print("press x to restart", 8)
+  end
+end
+
 function _update()
-  -- stop game
   if live_count <= 0 then
     if btnp(❎) then
       _init()
@@ -55,27 +71,31 @@ function _update()
     basket_x -= basket_speed
   end
 
-  -- keeping basked inside screen
   basket_x = mid(0, basket_x, 120)
 
   egg_spawn_timer += 1
   if egg_spawn_timer > 10 then
-    -- spawning eggs
     add(eggs, { x = rnd(120), y = -10 })
     egg_spawn_timer = 0
   end
 
   for egg in all(eggs) do
     egg.y += egg_speed
-
-    -- checking if egg is caught
     if abs(egg.x - basket_x) < 12 and egg.y + 4 >= basket_y and egg.y <= basket_y + 8 then
       del(eggs, egg)
       score += 1
+      if score % 5 == 0 then
+        live_count += 1
+      end
     end
+    if egg.y > 160 then
+      del(eggs, egg)
+      live_count -= 1
+    end
+  end
+end
 
     if egg.y > 160 then
-      --
       del(eggs, egg)
       live_count -= 1
     end
