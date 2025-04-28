@@ -75,6 +75,10 @@ function _update()
       if score % 5 == 0 then
         live_count += 1
       end
+      -- increase of speed
+      if score % 50 == 0 then
+      		egg_speed += 1
+      end
     end
     if egg.y > 160 then
       del(eggs, egg)
@@ -94,6 +98,7 @@ function draw_scaled_sprite(sprite_id, x, y, scale)
 
   sspr(sx, sy, sw, sh, x, y, sw * scale, sh * scale)
 end
+
 
 __gfx__
 0000000000000000000cc00000077000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
